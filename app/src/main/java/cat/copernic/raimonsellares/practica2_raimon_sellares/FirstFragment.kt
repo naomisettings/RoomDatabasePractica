@@ -9,6 +9,8 @@ import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import cat.copernic.raimonsellares.practica2_raimon_sellares.databinding.FragmentFirstBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class FirstFragment : Fragment() {
 
@@ -19,6 +21,11 @@ class FirstFragment : Fragment() {
 
         val binding: FragmentFirstBinding =
                 DataBindingUtil.inflate(inflater, R.layout.fragment_first, container, false)
+
+        binding.fab.setOnClickListener() { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
 
         binding.buttonFirst.setOnClickListener() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
