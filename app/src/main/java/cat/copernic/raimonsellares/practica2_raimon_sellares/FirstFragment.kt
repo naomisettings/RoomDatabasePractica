@@ -22,9 +22,8 @@ class FirstFragment : Fragment() {
         val binding: FragmentFirstBinding =
                 DataBindingUtil.inflate(inflater, R.layout.fragment_first, container, false)
 
-        binding.fab.setOnClickListener() { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        binding.fab.setOnClickListener() {
+                findNavController().navigate(R.id.action_FirstFragment_to_newSongFragment)
         }
 
         binding.buttonFirst.setOnClickListener() {
