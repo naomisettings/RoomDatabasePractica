@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="cat.copernic.raimonsellares.practica2_raimon_sellares.FirstFragment"
+        android:name="cat.copernic.raimonsellares.practica2_raimon_sellares.llistaMusica.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -19,6 +19,12 @@
             android:id="@+id/action_FirstFragment_to_newSongFragment"
             app:destination="@id/newSongFragment"
             app:popUpToInclusive="false" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="artist"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -30,6 +36,12 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="artist"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/newSongFragment"
