@@ -21,14 +21,20 @@
             app:popUpToInclusive="false" />
         <argument
             android:name="name"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="none" />
         <argument
             android:name="artist"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="none" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="cat.copernic.raimonsellares.practica2_raimon_sellares.SecondFragment"
+        android:name="cat.copernic.raimonsellares.practica2_raimon_sellares.modifysong.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
@@ -42,10 +48,13 @@
         <argument
             android:name="artist"
             app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/newSongFragment"
-        android:name="cat.copernic.raimonsellares.practica2_raimon_sellares.NewSongFragment"
+        android:name="cat.copernic.raimonsellares.practica2_raimon_sellares.newsong.NewSongFragment"
         android:label="NewSongFragment"
         tools:layout="@layout/fragment_new_song">
         <action

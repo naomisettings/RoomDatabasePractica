@@ -12,27 +12,36 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.raimonsellares.practica2_raimon_sellares.R
+import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabase
 import cat.copernic.raimonsellares.practica2_raimon_sellares.databinding.FragmentFirstBinding
 import java.util.*
 
 class FirstFragment : Fragment() {
 
-    private lateinit var viewModel: SongViewModel
+    private lateinit var rvSongs: RecyclerView
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding: FragmentFirstBinding =
                 DataBindingUtil.inflate(inflater, R.layout.fragment_first, container, false)
 
-        viewModel = ViewModelProvider(this).get(SongViewModel::class.java)
+        val application = requireNotNull(this.activity).application
+        val arguments = FirstFragmentArgs.fromBundle(requireArguments())
 
-        var rvSongs = binding.rvSongs
-        showSongs(rvSongs)
+        // Create an instance of the ViewModel Factory.
+        val dataSource = MusicaDatabase.getInstance(application).musicaDatabaseDao
+        val viewModelFactory = MusicViewModelFactory(arguments.id, dataSource)
 
-        binding.fab.setOnClickListener() {
+        // Get a reference to the ViewModel associated with this fragment.
+        val songViewModel =
+            ViewModelProvider(
+                this, viewModelFactory).get(SongViewModel::class.java)
+
+
+        binding.fab.setOnClickListener {
                 findNavController().navigate(R.id.action_FirstFragment_to_newSongFragment)
         }
 
@@ -40,12 +49,12 @@ class FirstFragment : Fragment() {
         return binding.root
     }
 
-    fun showSongs(rvSongs: RecyclerView){
+    private fun showSongs(rvSongs: RecyclerView){
 
         val s1 = Song(name = "nom", artist = "artista")
         val s2 = Song(name = "nom2", artist = "artista2")
         val s3 = Song(name = "nom3", artist = "artista3")
-        var songs: MutableList<Song> = mutableListOf(s1, s2, s3)
+        val songs: MutableList<Song> = mutableListOf(s1, s2, s3)
 
         val adapter = SongsAdapter(
             songs as ArrayList<Song>,
@@ -55,7 +64,8 @@ class FirstFragment : Fragment() {
                         FirstFragmentDirections
                             .actionFirstFragmentToSecondFragment(
                                 name,
-                                artist
+                                artist,
+                                id
                             )
                     )
             })
