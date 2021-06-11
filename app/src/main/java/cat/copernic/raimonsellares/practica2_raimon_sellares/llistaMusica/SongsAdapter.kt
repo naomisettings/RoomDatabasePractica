@@ -54,7 +54,6 @@ class SongsAdapter(  var mSongs: List<Musica>,
     }
 }
 
-
 open class CellClickListener(val clickListener: (name: String, aritsta: String, id: Int) -> Unit) {
     fun onCellClickListener(data: Musica) {
         clickListener(
@@ -64,6 +63,7 @@ open class CellClickListener(val clickListener: (name: String, aritsta: String, 
         )
     }
 }
+
 @BindingAdapter("songQualityString")
 fun TextView.setSleepQualityString(item: Musica?) {
     item?.let {

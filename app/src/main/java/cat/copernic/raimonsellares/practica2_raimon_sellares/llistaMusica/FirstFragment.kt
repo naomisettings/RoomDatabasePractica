@@ -45,9 +45,9 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_newSongFragment)
         }
 
-        musicViewModel.sonsRecycler.observe(viewLifecycleOwner) {
+        musicViewModel.sonsRecycler.observe(viewLifecycleOwner) { llistatMusica ->
 
-            val adapter = SongsAdapter(it, CellClickListener { name, artist, id ->
+            val adapter = SongsAdapter(llistatMusica, CellClickListener { name, artist, id ->
                 findNavController().navigate(
                     FirstFragmentDirections.actionFirstFragmentToSecondFragment(
                         name,

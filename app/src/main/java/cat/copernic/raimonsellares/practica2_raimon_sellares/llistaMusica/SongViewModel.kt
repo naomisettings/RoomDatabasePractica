@@ -3,7 +3,6 @@ package cat.copernic.raimonsellares.practica2_raimon_sellares.llistaMusica
 import android.app.Application
 import androidx.lifecycle.*
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.Musica
-import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabase
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabaseDao
 import kotlinx.coroutines.launch
 
@@ -26,7 +25,7 @@ class SongViewModel(val database: MusicaDatabaseDao,
         }
     }
 
-    private suspend fun getSongsFromDatabase(): LiveData<List<Musica>> {
+    private fun getSongsFromDatabase(): LiveData<List<Musica>> {
         return database.getAllNights()
     }
 

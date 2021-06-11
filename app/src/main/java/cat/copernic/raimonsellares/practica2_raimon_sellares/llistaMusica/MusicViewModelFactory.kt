@@ -10,6 +10,7 @@ class MusicViewModelFactory(
     private val dataSource: MusicaDatabaseDao,
     private val application: Application
 ) : ViewModelProvider.Factory {
+
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SongViewModel::class.java)) {
