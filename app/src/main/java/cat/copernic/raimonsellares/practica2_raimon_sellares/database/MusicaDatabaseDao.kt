@@ -1,6 +1,7 @@
 package cat.copernic.raimonsellares.practica2_raimon_sellares.database
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -24,6 +25,6 @@ interface MusicaDatabaseDao {
     @Query("SELECT * FROM musica_taula ORDER BY id DESC")
     fun getAllNights(): LiveData<List<Musica>>
 
-    @Query("SELECT * FROM musica_taula ORDER BY id LIMIT 1")
+    @Query("SELECT * FROM musica_taula ORDER BY id DESC LIMIT 1")
     suspend fun getTonight(): Musica?
 }

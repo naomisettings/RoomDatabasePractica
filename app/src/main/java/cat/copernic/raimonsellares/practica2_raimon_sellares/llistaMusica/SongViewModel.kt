@@ -3,35 +3,46 @@ package cat.copernic.raimonsellares.practica2_raimon_sellares.llistaMusica
 import android.app.Application
 import androidx.lifecycle.*
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.Musica
+import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabase
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabaseDao
 import kotlinx.coroutines.launch
 
 class SongViewModel(val database: MusicaDatabaseDao,
-                       application: Application
-) : AndroidViewModel(application) {
+                    application: Application
+) : AndroidViewModel(application)  {
 
-    private var songs = database.getAllNights()
-    lateinit var sonsRecycler: LiveData<List<Musica>>
+    var sonsRecycler: LiveData<List<Musica>>
+
     init {
-        getAllSongs()
+        sonsRecycler = MutableLiveData()
+    }
+    init {
+        initializeTonight()
     }
 
-    fun getAllSongs(): LiveData<List<Musica>> {
+    private fun initializeTonight() {
         viewModelScope.launch {
-            songs = getAllSongs()
+            sonsRecycler = getSongsFromDatabase()
         }
-        return songs
     }
-    private suspend fun getAllSongsFromDatabase(): LiveData<List<Musica>> {
+
+    private suspend fun getSongsFromDatabase(): LiveData<List<Musica>> {
         return database.getAllNights()
     }
 
-    fun getData(): LiveData<List<Musica>>  {
-        viewModelScope.launch {
-           sonsRecycler = getAllSongsFromDatabase()
-        }
+
+
+/*
+    //Per insertar, esborrar i actualitzar
+    fun getAllSongsFromDatabase(): List<Musica>? {
+        val songsDAO = MusicaDatabase.getInstance((getApplication())).musicaDatabaseDao
+        sonsRecycler = songsDAO.getAllNights()
+
         return sonsRecycler
+
     }
+
+ */
 
 
 }

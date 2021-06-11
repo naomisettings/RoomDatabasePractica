@@ -1,38 +1,32 @@
 package cat.copernic.raimonsellares.practica2_raimon_sellares.llistaMusica
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.raimonsellares.practica2_raimon_sellares.R
-import cat.copernic.raimonsellares.practica2_raimon_sellares.database.Musica
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabase
-import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabaseDao
 import cat.copernic.raimonsellares.practica2_raimon_sellares.databinding.FragmentFirstBinding
-import cat.copernic.raimonsellares.practica2_raimon_sellares.newsong.NewSongModelFactoryu
-import cat.copernic.raimonsellares.practica2_raimon_sellares.newsong.NewSongViewModel
-import java.util.*
 
 class FirstFragment : Fragment() {
 
     private lateinit var rvSongs: RecyclerView
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         val binding: FragmentFirstBinding =
-                DataBindingUtil.inflate(inflater, R.layout.fragment_first, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_first, container, false)
 
+        rvSongs = binding.rvSongs
 
         val application = requireNotNull(this.activity).application
 
@@ -48,31 +42,27 @@ class FirstFragment : Fragment() {
 
 
         binding.fab.setOnClickListener {
-                findNavController().navigate(R.id.action_FirstFragment_to_newSongFragment)
+            findNavController().navigate(R.id.action_FirstFragment_to_newSongFragment)
         }
 
-        musicViewModel.getAllSongs().observeForever{
-        Log.d("sonsobserve", it[0].song)
-           val adapter = SongsAdapter(
-                it as MutableList<Musica>,
-                CellClickListener { name, artist ->
-                    view?.findNavController()
-                        ?.navigate(
-                            FirstFragmentDirections
-                                .actionFirstFragmentToSecondFragment(
-                                    name,
-                                    artist,
-                                    id
-                                )
-                        )
-                })
+        musicViewModel.sonsRecycler.observe(viewLifecycleOwner) {
+
+            val adapter = SongsAdapter(it, CellClickListener { name, artist, id ->
+                findNavController().navigate(
+                    FirstFragmentDirections.actionFirstFragmentToSecondFragment(
+                        name,
+                        artist,
+                        id
+                    )
+                )
+            })
 
             rvSongs.adapter = adapter
             rvSongs.layoutManager = LinearLayoutManager(this.context)
 
         }
-
         return binding.root
     }
 }
+
 
