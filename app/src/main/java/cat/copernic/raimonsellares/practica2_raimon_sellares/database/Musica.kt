@@ -11,9 +11,9 @@ data class Musica(
     var id: Int = 0,
 
     @ColumnInfo(name = "nom")
-    val song: String,
+    var song: String = "",
 
     @ColumnInfo(name = "artista")
-    var artista: String,
+    var artista: String = "",
 
-)
+    )

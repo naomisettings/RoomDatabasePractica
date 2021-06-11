@@ -24,6 +24,6 @@ interface MusicaDatabaseDao {
     @Query("SELECT * FROM musica_taula ORDER BY id DESC")
     fun getAllNights(): LiveData<List<Musica>>
 
-    @Query("SELECT * FROM musica_taula ORDER BY id DESC LIMIT 1")
+    @Query("SELECT * FROM musica_taula ORDER BY id LIMIT 1")
     suspend fun getTonight(): Musica?
 }

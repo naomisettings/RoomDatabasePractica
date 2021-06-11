@@ -5,16 +5,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import cat.copernic.raimonsellares.practica2_raimon_sellares.database.Musica
 import cat.copernic.raimonsellares.practica2_raimon_sellares.databinding.ItemSongBinding
 
-class SongsAdapter(var mSongs: MutableList<Song>, var cellClickListener: CellClickListener) :
+class SongsAdapter(var mSongs: MutableList<Musica>, var cellClickListener: CellClickListener) :
     RecyclerView.Adapter<SongsAdapter.ViewHolder>() {
 
+    fun setListData(data: MutableList<Musica>){
+        this.mSongs = data
+
+    }
 
     inner class ViewHolder(val binding: ItemSongBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(song: Song) {
+        fun bind(song: Musica) {
         }
     }
 
@@ -33,8 +39,8 @@ class SongsAdapter(var mSongs: MutableList<Song>, var cellClickListener: CellCli
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(mSongs[position]) {
-                binding.nameSong.text = this.name
-                binding.artistSong.text = this.artist
+                binding.nameSong.text = this.song
+                binding.artistSong.text = this.artista
 
                 holder.bind(mSongs[position])
                 holder.itemView.setOnClickListener {
@@ -52,17 +58,17 @@ class SongsAdapter(var mSongs: MutableList<Song>, var cellClickListener: CellCli
 
 
 open class CellClickListener(val clickListener: (name: String, artist: String) -> Unit) {
-    fun onCellClickListener(data: Song) {
+    fun onCellClickListener(data: Musica) {
         clickListener(
-            data.name,
-            data.artist
+            data.song,
+            data.artista
         )
     }
 }
 @BindingAdapter("songQualityString")
-fun TextView.setSleepQualityString(item: Song?) {
+fun TextView.setSleepQualityString(item: Musica?) {
     item?.let {
-        text = item.name
+        text = item.song
     }
 }
 
