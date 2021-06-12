@@ -21,8 +21,8 @@ class SecondFragment : Fragment() {
     private lateinit var args: SecondFragmentArgs
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         val binding: FragmentSecondBinding =
@@ -48,17 +48,14 @@ class SecondFragment : Fragment() {
 
         binding.bttnDoneModify.setOnClickListener {
 
-
-            val musicEntity = Musica()
-            musicEntity.song = binding.editTextTextPersonName.text.toString()
-            musicEntity.artista = binding.editTextTextPersonName2.text.toString()
-            Log.i("insertddbb2", musicEntity.song)
+            val musicEntity = Musica(
+                id = args.id,
+                song = binding.editTextTextPersonName.text.toString(),
+                artista = binding.editTextTextPersonName2.text.toString()
+            )
 
             modifySongViewModel.onStartSong(musicEntity)
-            val song = modifySongViewModel.getData()?.artista
-            if (song != null) {
-                Log.i("insertddbb", song)
-            }
+
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
 

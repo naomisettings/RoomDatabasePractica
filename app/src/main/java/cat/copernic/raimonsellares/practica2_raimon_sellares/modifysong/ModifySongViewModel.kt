@@ -46,6 +46,7 @@ class ModifySongViewModel(
 
             val oldNight = musica.value ?: return@launch
 
+            oldNight.id = music.id
             oldNight.song = music.song
             oldNight.artista = music.artista
 

@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.Musica
 import cat.copernic.raimonsellares.practica2_raimon_sellares.databinding.ItemSongBinding
 
-class SongsAdapter(  var mSongs: List<Musica>,
+class SongsAdapter(
+    var mSongs: List<Musica>,
     var cellClickListener: CellClickListener
 ) :
     RecyclerView.Adapter<SongsAdapter.ViewHolder>() {
@@ -17,6 +18,7 @@ class SongsAdapter(  var mSongs: List<Musica>,
     inner class ViewHolder(val binding: ItemSongBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Musica) {
+            binding.executePendingBindings()
         }
     }
 
@@ -36,16 +38,15 @@ class SongsAdapter(  var mSongs: List<Musica>,
 
         holder.itemView
         with(holder) {
-            with(mSongs[position]) {
-                binding.nameSong.text = this.song
-                binding.artistSong.text = this.artista
 
-                holder.bind(mSongs[position])
-                holder.itemView.setOnClickListener {
-                    cellClickListener.onCellClickListener(mSongs[position])
-                }
+            binding.nameSong.text = mSongs[position].song
+            binding.artistSong.text = mSongs[position].artista
 
+            holder.bind(mSongs[position])
+            holder.itemView.setOnClickListener {
+                cellClickListener.onCellClickListener(mSongs[position])
             }
+
         }
     }
 
