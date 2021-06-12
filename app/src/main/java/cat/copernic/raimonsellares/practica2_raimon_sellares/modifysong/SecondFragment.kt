@@ -1,7 +1,6 @@
 package cat.copernic.raimonsellares.practica2_raimon_sellares.modifysong
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,6 @@ import cat.copernic.raimonsellares.practica2_raimon_sellares.R
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.Musica
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabase
 import cat.copernic.raimonsellares.practica2_raimon_sellares.databinding.FragmentSecondBinding
-import cat.copernic.raimonsellares.practica2_raimon_sellares.newsong.NewSongModelFactoryu
-import cat.copernic.raimonsellares.practica2_raimon_sellares.newsong.NewSongViewModel
 
 class SecondFragment : Fragment() {
 
