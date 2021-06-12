@@ -19,8 +19,8 @@ interface MusicaDatabaseDao {
     @Query("SELECT * from musica_taula WHERE id = :key")
     suspend fun get(key: Int): Musica?
 
-    @Query("DELETE FROM musica_taula")
-    suspend fun clear()
+    @Query("DELETE FROM musica_taula WHERE id = :keya")
+    suspend fun delete(keya: Int)
 
     @Query("SELECT * FROM musica_taula ORDER BY id DESC")
     fun getAllNights(): LiveData<List<Musica>>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import cat.copernic.raimonsellares.practica2_raimon_sellares.R
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.Musica
 import cat.copernic.raimonsellares.practica2_raimon_sellares.database.MusicaDatabase
@@ -51,6 +52,8 @@ class NewSongFragment : Fragment() {
             if (song != null) {
                 Log.i("insertddbb", song)
             }
+            findNavController().navigate(R.id.action_newSongFragment_to_FirstFragment)
+
         }
 
         return binding.root
