@@ -30,12 +30,6 @@ class ModifySongViewModel(
         return database.getTonight()
     }
 
-    fun getData(): Musica? {
-        viewModelScope.launch {
-            musica.value = getTonightFromDatabase()
-        }
-        return musica.value
-    }
 
     private suspend fun update(night: Musica) {
         database.update(night)

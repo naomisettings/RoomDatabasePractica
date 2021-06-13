@@ -2,19 +2,13 @@ package cat.copernic.raimonsellares.practica2_raimon_sellares
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.media.session.MediaSessionCompat.Token.fromBundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import androidx.core.app.Person.fromBundle
-import androidx.media.AudioAttributesCompat.fromBundle
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,14 +18,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+
+        //Back Button
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        //Back Button
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.FirstFragment
+            ))
+
+        //Back Button
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        NavigationUI.setupActionBarWithNavController(this,navController)
     }
 
+    //Back Button
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration)
+    }
+
+    //Menú
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
-
+    //Menú
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -48,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
+    //Funció item menú
     fun snackbarMenu() {
         Snackbar.make(
             findViewById(android.R.id.content),
@@ -57,8 +72,8 @@ class MainActivity : AppCompatActivity() {
         )
             .setAction("Action", null).show()
     }
-
-    fun share(){
+    //Funció item menú
+    fun share() {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, "Descarrega l'app TOP SONGS - La millor música")
@@ -71,8 +86,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration)
-    }
+
+
 }

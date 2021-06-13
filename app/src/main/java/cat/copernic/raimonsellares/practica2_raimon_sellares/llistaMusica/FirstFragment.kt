@@ -61,6 +61,11 @@ class FirstFragment : Fragment() {
             rvSongs.layoutManager = LinearLayoutManager(this.context)
 
         }
+
+        binding.bttnDeleteAll.setOnClickListener {
+            musicViewModel.deleteAllFromDatabase()
+        }
+
         return binding.root
     }
 }
