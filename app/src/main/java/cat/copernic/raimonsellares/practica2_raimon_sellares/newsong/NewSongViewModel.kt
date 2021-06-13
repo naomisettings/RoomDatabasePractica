@@ -27,12 +27,6 @@ class NewSongViewModel(
         return database.getTonight()
     }
 
-    fun getData(): Musica? {
-        viewModelScope.launch {
-            musica.value = getTonightFromDatabase()
-        }
-        return musica.value
-    }
 
     private suspend fun insert(night: Musica) {
         database.insert(night)

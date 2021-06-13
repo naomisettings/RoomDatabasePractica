@@ -8,7 +8,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -84,8 +83,4 @@ class MainActivity : AppCompatActivity() {
         startActivity(shareIntent)
 
     }
-
-
-
-
 }

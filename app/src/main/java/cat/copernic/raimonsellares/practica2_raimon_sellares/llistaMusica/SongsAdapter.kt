@@ -38,11 +38,13 @@ class SongsAdapter(
 
         holder.itemView
         with(holder) {
+            with(mSongs[position]) {
+                binding.nameSong.text = this.song
+                binding.artistSong.text = this.artista
 
-            binding.nameSong.text = mSongs[position].song
-            binding.artistSong.text = mSongs[position].artista
+                holder.bind(this)
+            }
 
-            holder.bind(mSongs[position])
             holder.itemView.setOnClickListener {
                 cellClickListener.onCellClickListener(mSongs[position])
             }

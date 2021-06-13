@@ -48,10 +48,7 @@ class NewSongFragment : Fragment() {
             musicEntity.artista = artista2
 
             newSongViewModel.onStartSong(musicEntity)
-            val song = newSongViewModel.getData()?.artista
-            if (song != null) {
-                Log.i("insertddbb", song)
-            }
+
             findNavController().navigate(R.id.action_newSongFragment_to_FirstFragment)
 
         }
